@@ -24,16 +24,31 @@ export const projectsUpdate = data => ({
     data
 });
 
-export const PROJECT_ACTIVE = 'PROJECT_ACTIVE';
-export const projectActive = project => ({
-    type: PROJECT_ACTIVE,
-    project
+export const PROJECT_ACTIVE_ID = 'PROJECT_ACTIVE_ID';
+export const projectActiveId = id => ({
+    type: PROJECT_ACTIVE_ID,
+    id
 });
 
-export const CALENDAR_SWITCH = 'CALENDAR_SWITCH';
-export const calendarSwitch = date => ({
-    type: CALENDAR_SWITCH,
-    date
+export const PROJECT_MONTH_PREV = 'PROJECT_MONTH_PREV';
+export const projectMonthPrev = id => ({
+    type: PROJECT_MONTH_PREV,
+    id
+});
+
+export const PROJECT_MONTH_NEXT = 'PROJECT_MONTH_NEXT';
+export const projectMonthNext = id => ({
+    type: PROJECT_MONTH_NEXT,
+    id
+});
+
+export const PROJECT_EDIT = 'PROJECT_EDIT';
+export const projectEdit = (id, date, projectType, value) => ({
+    type: PROJECT_EDIT,
+    id,
+    date,
+    projectType,
+    value
 });
 
 export const getMainData = (dispatch, getState) => {

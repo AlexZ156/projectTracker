@@ -2,42 +2,42 @@
 import { connect } from 'react-redux';
 import Calendar from './../calendar/'
 
-const stateToProps = ({projectActive}) =>({
-    projectActive
+const stateToProps = ({projects, activeProjectId}) =>({
+    projects,
+    activeProjectId
 });
 
-const ProjectEdit = ({projectActive}) => {
+class ProjectEdit extends React.Component {
+    render() {
+        const { projects, activeProjectId } = this.props;
+        const project = projects[activeProjectId];
 
-    console.log(projectActive)
-    return(
-        <div>
-            {!!Object.keys(projectActive).length && 
-                <div>
-                    <h1>{projectActive.name}</h1>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Type</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>main</td>
-                            </tr>
-                            <tr>
-                                <td>help</td>
-                            </tr>
-                            <tr>
-                                <td>feed</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <Calendar/>
-                    <button>+++ Save +++</button>
-                </div>
-            }
-        </div>
-    )
+        return(
+            <div>
+                <h1>{project.name}</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>main</td>
+                        </tr>
+                        <tr>
+                            <td>help</td>
+                        </tr>
+                        <tr>
+                            <td>feed</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <Calendar/>
+                <button>+++ Save +++</button>
+            </div>
+        )
+    }
 }
 
 export default connect(stateToProps)(ProjectEdit);

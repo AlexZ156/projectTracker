@@ -1,38 +1,34 @@
 'use strict';
-import { getMainData, calendarSwitch } from 'actions';
+import { getMainData } from 'actions';
 import { connect } from 'react-redux';
 import ProgectsList from './project-list'
 import ProjectEdit from './project-edit'
 
 
-const stateToProps = () => {
-    return {
-
-    };
-};
+const stateToProps = ({activeProjectId}) => ({
+    activeProjectId
+});
 
 const dispatchToProps = (dispatch) => {
     return {
         getMainData() {
             dispatch(getMainData);
-        },
-        calendarSwitch(date) {
-            dispatch(calendarSwitch(date))
         }
     };
 };
 
 class AppComponent extends React.Component {
     componentDidMount() {
-        const { getMainData, calendarSwitch } = this.props;
+        const { getMainData } = this.props;
         getMainData();
-        calendarSwitch(Date.now());
     }
     render() {
-       return(
+        const { activeProjectId } = this.props;
+
+        return(
             <div>
                 <ProgectsList/>
-                <ProjectEdit/>
+                {activeProjectId && <ProjectEdit/>}
             </div>
         ); 
     }

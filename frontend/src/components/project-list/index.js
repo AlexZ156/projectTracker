@@ -13,8 +13,8 @@ class ProgectsList extends React.Component {
         return (
             <table>
                 <tbody>
-                    {projects.map((project, index) => {
-                         return <Project data={project} key={index}/>;
+                    {Object.keys(projects).map(name => {
+                         return <Project id={name} key={name}/>;
                     })}
                 </tbody>
             </table>

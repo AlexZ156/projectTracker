@@ -1,18 +1,24 @@
 'use strict';
 
 import { connect } from 'react-redux';
-import { projectActive } from 'actions';
+import { projectActiveId } from 'actions';
 
-const Project = ({data, dispatch}) => {
+const stateToProps = ({projects}) => ({
+    projects
+})
+
+const Project = ({projects, id, dispatch}) => {
     const chooseProject = () => {
-        dispatch(projectActive(data));
+        dispatch(projectActiveId(id));
     };
+
+    const project = projects[id];
 
     return (
         <tr>
-            <td onClick={chooseProject}>{data.name}</td>
+            <td onClick={chooseProject}>{project.name}</td>
         </tr>
     );
 }
 
-export default connect()(Project);
+export default connect(stateToProps)(Project);
