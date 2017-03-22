@@ -15,18 +15,16 @@ const getNextMonth = (date = Date.now()) => {
     return new Date(date).setMonth(new Date(date).getMonth() + 1);
 };
 
-const setTiming = (timeObj, action) => {
-    console.log('timeObj == > ', timeObj)
-    console.log('action == > ', action)
-    console.log('=============================')
+const setTiming = (noteObj, action) => {
     return {
-        ...timeObj,
+        ...noteObj,
         [action.date]: {
-            ...((timeObj[action.date] && timeObj[action.date][action.projectType]) || {}),
-            [action.projectType]: action.value
+            ...(noteObj[action.date] || {}),
+            [action.projectType]: {
+                ...((noteObj[action.date] && noteObj[action.date][action.projectType]) || {}),
+                ...{value: action.value}
+            }
         }
-        // ...(state[action.id].timing)
-        // ...(timeObj[action.date])
     };
 }
 
@@ -57,7 +55,9 @@ export default (state = {}, action) => {
                 ...state,
                 [action.id]: {
                     ...state[action.id],
-                    ...setTiming(state[action.id].timing || {}, action)
+                    ...{notes: {
+                        ...setTiming(state[action.id].notes || {}, action)
+                    }}
                 }
 
             };

@@ -35,9 +35,6 @@ const getMonthArr = (date = Date.now()) => {
 };
 
 class Calendar extends React.Component {
-    shouldComponentUpdate(nextProps) {
-        return true;
-    }
     render() {
         const { activeProjectId, projects } = this.props;
         const project = projects[activeProjectId];
@@ -51,17 +48,17 @@ class Calendar extends React.Component {
                    <tbody>
                        <tr>
                            {Object.keys(month).map(key => (
-                                <Cell key={key} type="main" date={key}/>
+                                <Cell key={`${activeProjectId}-${key}`} type="main" date={key}/>
                             ))}
                        </tr>
                        <tr>
                            {Object.keys(month).map(key => (
-                                <Cell key={key} type="help" date={key}/>
+                                <Cell key={`${activeProjectId}-${key}`} type="help" date={key}/>
                             ))}
                        </tr>
                        <tr>
                            {Object.keys(month).map(key => (
-                                <Cell key={key} type="feed" date={key}/>
+                                <Cell key={`${activeProjectId}-${key}`} type="feed" date={key}/>
                             ))}
                        </tr>
                    </tbody>
