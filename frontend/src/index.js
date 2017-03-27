@@ -10,10 +10,20 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import filesRefreshMiddleware from './files-refresh-middleware';
 import reducers from './reducers';
+import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
+import {
+    BrowserRouter as Router,
+    Route,
+    NavLink
+} from 'react-router-dom';
+
+const history = createHistory();
 
 let middlewares = [
     applyMiddleware(
         filesRefreshMiddleware,
+        routerMiddleware(history),
         thunk
     )
 ];
@@ -24,15 +34,23 @@ let middlewares = [
     )
 // }
 
+console.log(11, history)
 export const store = createStore(
-    combineReducers(reducers),
+    combineReducers({
+        ...reducers,
+        router: routerReducer
+    }),
     // userLocalState,
     compose(...middlewares)
 );
 
 ReactDOM.render(
     <Provider store={store}>
-        <App/>
+        <ConnectedRouter history={history}>
+          <div>
+            <Route exact path="/" component={App}/>
+          </div>
+        </ConnectedRouter>
     </Provider>,
     document.getElementById('my-app')
 );
