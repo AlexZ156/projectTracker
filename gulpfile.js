@@ -5,6 +5,7 @@ const path = require('path');
 const webpack = require('webpack');
 const browserSync = require('browser-sync').create();
 const webpackConfig = require('./webpack.config');
+const historyApiFallback = require('connect-history-api-fallback');
 
 const reloadPage = (cb) => {
 	browserSync.reload();
@@ -26,7 +27,8 @@ const serve = (cb) => (
 		server: {
 			baseDir: './frontend/dist',
 			index: 'index.html',
-			notify: false/*,
+			notify: false,
+			middleware: [historyApiFallback()]/*,
 			directory: true*/
 		},
 		files: [path.resolve(__dirname, 'frontenddist/**/*.*')]

@@ -36,6 +36,7 @@ class Cell extends React.Component {
                     defaultValue={timeTypeObj.value}
                     min="0"
                     max="24"
+                    step="0.1"
                 />
             </td>
         )
