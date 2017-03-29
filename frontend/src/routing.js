@@ -37,8 +37,6 @@ export default connect()((...a) => {
     console.log(1111, isLogined)
     return(
         <Switch>
-            <Route path="/" exact component={Home}/>
-            <Route path="/login" component={Login}/>
             {/*<Route render={() => (isLogined ? (<Redirect to="/"/>) : (<div>
                 <Redirect to="/login"/>
                 <Login/>

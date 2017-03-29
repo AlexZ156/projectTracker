@@ -25,16 +25,10 @@ const buildScripts = (function() {
 const serve = (cb) => (
 	browserSync.init({
 		server: {
-<<<<<<< HEAD
 			baseDir: './frontend/dist',
 			index: 'index.html',
 			notify: false,
 			middleware: [historyApiFallback()]/*,
-=======
-			baseDir: './frontend/dist/',
-			middleware: [historyApiFallback()],
-			notify: false/*,
->>>>>>> 367091e862fe2f3c30f1a596e8263d0ea3342cd2
 			directory: true*/
 		},
 		files: [path.resolve(__dirname, 'frontenddist/**/*.*')]
