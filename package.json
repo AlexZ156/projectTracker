@@ -23,6 +23,7 @@
     "gulp": "github:gulpjs/gulp#4.0",
     "postcss": "^5.1.2",
     "postcss-loader": "^0.10.1",
+    "react-router-redux": "^5.0.0-alpha.4",
     "style-loader": "^0.13.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^2.3.1",
@@ -38,9 +39,14 @@
     "react-redux": "^5.0.3",
     "react-router": "^4.0.0",
     "react-router-dom": "^4.0.0",
+<<<<<<< HEAD
     "react-router-redux": "^4.0.8",
     "redux": "^3.6.0",
     "redux-router": "^2.1.2",
     "redux-thunk": "^2.2.0"
+=======
+    "redux": "^3.5.2",
+    "redux-thunk": "^1.0.3"
+>>>>>>> 367091e862fe2f3c30f1a596e8263d0ea3342cd2
   }
 }
