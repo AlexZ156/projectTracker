@@ -9,39 +9,66 @@ import {
     Redirect,
     Link 
 } from 'react-router-dom';
-import App from './components';
 import Login from './components/login' ;
 import Home from './components/home' ;
-const isLogined = false;
-const routs = [
+import Project from './components/project' ;
+import NoMatch from './components/404' ;
+const routes = [
+    {
+        path: '/',
+        component: Home,
+        exact: true
+    },
+    {
+        path: '/projects',
+        component: Project
+    }/*,
     {
         path: '/login',
         component: Login
-    },
-    {
-        path: '/',
-        component: Home
-    }
-]
+    }*/
+];
 
-const stateToProps = () => ({
-
-})
-
-const getRoutes = () => {
-    return routs.map((rout) => {
-
-    })
-};
-export default connect()((...a) => {
-    console.log(1111, isLogined)
-    return(
-        <Switch>
-            {/*<Route render={() => (isLogined ? (<Redirect to="/"/>) : (<div>
-                <Redirect to="/login"/>
-                <Login/>
-            </div>))} />*/}
-            {/*<Route component={App}/>*/}
-        </Switch>
+const RotesWrap = (route) => {
+    // console.log('++++route++++  ', route)
+    // console.log('++++ props ++++  ', route.props)
+    console.log('++++ history ++++  ', history)
+    return (
+        <Route path={route.path} {...(route.exact ? {exact: true} : {})} render={props => {
+    console.log('++++ props ++++  ', props)
+            return (
+                !route.props.login ?
+                    <div>
+                        {props.match.path !== '/login' && <Redirect to="/login"/>}
+                    </div> :
+                    <route.component {...props} routes={route.routes}/>
+            )
+        }}/>
     )
-});
+}
+
+const stateToProps = ({login}) => {
+    return {
+        login
+    }
+}
+
+class AppRouting extends React.Component {
+    render() {
+    console.log(321, this.props)
+        return (
+            <Router>
+                <Switch>
+                    <Route path="/login" component={Login}/>
+                    {routes.map((route, i) => (
+                        <RotesWrap key={i} {...route} props={this.props}/>
+                    ))}
+                    <Route component={NoMatch}/>
+                </Switch>
+            </Router>
+        )
+    }
+}
+
+export default connect(stateToProps)(AppRouting);
+

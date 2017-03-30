@@ -2,6 +2,16 @@
 
 import request from './fetch';
 
+export const LOGIN = 'LOGIN';
+export const loginHandler = () => ({
+    type: LOGIN
+});
+
+export const LOGOUT = 'LOGOUT';
+export const logoutHandler = () => ({
+    type: LOGOUT
+});
+
 export const FETCH_START = 'FETCH_START';
 export const fetchStart = () => ({
     type: FETCH_START

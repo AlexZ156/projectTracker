@@ -10,11 +10,12 @@ import {
 import { connect } from 'react-redux';
 
 
-const Home = () => {
+const Home = ({match}) => {
+    console.log('Home', match)
     return(
         <div>
             <h1>!!! Home !!!</h1>
-            <Link to="/login">Login</Link>
+            <Link to="/projects">Projects link</Link>
         </div>
     );
 };

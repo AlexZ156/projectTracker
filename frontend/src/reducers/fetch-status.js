@@ -14,4 +14,4 @@ export default (state = 0, action) => {
         default:
             return state;
     }
-}
+};
