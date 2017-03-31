@@ -8,16 +8,34 @@ import {
     Link 
 } from 'react-router-dom';
 import { connect } from 'react-redux';
+import LoginWrap from '../login-wrap';
+import createBrowserHistory from 'history/createBrowserHistory';
+const browserHistory = createBrowserHistory();
 
+const stateToProps = ({login}) => ({
+    login
+});
 
-const Home = ({match}) => {
-    console.log('Home', match)
+const HomeComponent = () => (
+    <div>
+        {console.log(33333)}
+        <h1>!!! Home !!!</h1>
+
+        <button onClick={() => {
+            console.log(11)
+            console.log(browserHistory)
+            browserHistory.push('/projects')
+        }}>Projects link</button>
+        <Link to="/projects">Projects link</Link>
+    </div>
+)
+
+const Home = ({match, login}) => {
     return(
-        <div>
-            <h1>!!! Home !!!</h1>
-            <Link to="/projects">Projects link</Link>
-        </div>
+        <LoginWrap>
+            {login && <HomeComponent/>}
+        </LoginWrap>
     );
 };
 
-export default connect()(Home);
+export default connect(stateToProps)(Home);

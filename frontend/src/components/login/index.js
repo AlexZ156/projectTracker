@@ -9,26 +9,6 @@ import {
 } from 'react-router-dom';
 import { getMainData, loginHandler } from 'actions';
 import { connect } from 'react-redux';
-const isLogined = true;
-
-const LoginComponent = () => (
-
-    <div>
-        <Redirect to="/login"/>
-        <h1>Log in !!!</h1>
-    </div>
-);
-
-/*const LogIn = ({children, match, location}) => {
-    // isLogined && dispatch(getMainData);
-    console.log('LogIn', match)
-    return (
-        <div>
-            <h1>Login !!!!</h1>
-            <Link to="/">Home</Link>
-        </div>
-    );
-};*/
 
 const stateToProps = ({login}) => ({
     login

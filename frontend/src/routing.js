@@ -11,7 +11,7 @@ import {
 } from 'react-router-dom';
 import Login from './components/login' ;
 import Home from './components/home' ;
-import Project from './components/project' ;
+import Project from './components/projects' ;
 import NoMatch from './components/404' ;
 const routes = [
     {
@@ -24,18 +24,14 @@ const routes = [
         component: Project
     }/*,
     {
-        path: '/login',
-        component: Login
+        path: '/projects/:projectId',
+        component: Home
     }*/
 ];
 
-const RotesWrap = (route) => {
-    // console.log('++++route++++  ', route)
-    // console.log('++++ props ++++  ', route.props)
-    console.log('++++ history ++++  ', history)
+/*const RotesWrap = (route) => {
     return (
         <Route path={route.path} {...(route.exact ? {exact: true} : {})} render={props => {
-    console.log('++++ props ++++  ', props)
             return (
                 !route.props.login ?
                     <div>
@@ -55,7 +51,6 @@ const stateToProps = ({login}) => {
 
 class AppRouting extends React.Component {
     render() {
-    console.log(321, this.props)
         return (
             <Router>
                 <Switch>
@@ -68,7 +63,31 @@ class AppRouting extends React.Component {
             </Router>
         )
     }
+}*/
+
+const RotesWrap = (route) => {
+    return (
+        <Route path={route.path} {...(route.exact ? {exact: true} : {})} render={props => {
+            return <route.component {...props} routes={route.routes}/>
+        }}/>
+    )
 }
 
-export default connect(stateToProps)(AppRouting);
+class AppRouting extends React.Component {
+    render() {
+        console.log(this.props.history)
+        return (
+            <Router history={{...this.props.history}}>
+                <Switch>
+                    {routes.map((route, i) => (
+                        <RotesWrap key={i} {...route} props={this.props}/>
+                    ))}
+                    <Route component={NoMatch}/>
+                </Switch>
+            </Router>
+        )
+    }
+}
+
+export default connect(/*stateToProps*/)(AppRouting);
 

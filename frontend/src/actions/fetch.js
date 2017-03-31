@@ -38,7 +38,6 @@ const hidePreloader = (dispatch) => {
 
 export default (dispatch, url, params = {}, cb) => {
 	dispatch(fetchStart());
-	console.log('fakeData == > ', fakeData)
 	cb(fakeData);
 	dispatch(fetchEnd());
 	/*dispatch(fetchStart());

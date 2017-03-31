@@ -2,16 +2,6 @@
 
 import request from './fetch';
 
-export const LOGIN = 'LOGIN';
-export const loginHandler = () => ({
-    type: LOGIN
-});
-
-export const LOGOUT = 'LOGOUT';
-export const logoutHandler = () => ({
-    type: LOGOUT
-});
-
 export const FETCH_START = 'FETCH_START';
 export const fetchStart = () => ({
     type: FETCH_START
@@ -60,6 +50,24 @@ export const projectEdit = (id, date, projectType, value) => ({
     projectType,
     value
 });
+
+export const LOGOUT = 'LOGOUT';
+export const logoutHandler = () => ({
+    type: LOGOUT
+});
+
+export const LOGIN = 'LOGIN';
+export const loginHandler = () => ({
+    type: LOGIN
+});
+export const checkLogin = () => (dispatch, getState) => {
+    request(dispatch, 'some url', {/* some params*/}, json => {
+        console.log('action has logged !!!');
+        dispatch(loginHandler());
+        console.log('action set App data !!!');
+        dispatch(projectsUpdate(json));
+    });
+};
 
 export const getMainData = (dispatch, getState) => {
     request(dispatch, 'some url', {/* some params*/}, json => dispatch(projectsUpdate(json)));
