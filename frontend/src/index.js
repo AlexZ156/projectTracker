@@ -19,7 +19,7 @@ import {
 import createBrowserHistory from 'history/createBrowserHistory'
 
 
-import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux';
+import { ConnectedRouter, syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux';
 import AppRouting from './routing';
 import locaStorage from './local-storage';
 
@@ -46,11 +46,11 @@ export const store = createStore(
     }),
     compose(...middlewares)
 );
-const history = syncHistoryWithStore(browserHistory, store);
+// const history = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(
     <Provider store={store}>
-        <AppRouting history={history}/>
+        <AppRouting history={browserHistory}/>
     </Provider>,
     document.getElementById('my-app')
 );
