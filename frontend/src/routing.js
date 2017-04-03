@@ -1,19 +1,20 @@
 'use strict';
 
-import { connect } from 'react-redux';
 import {
-    BrowserRouter as Router,
+    connect
+} from 'react-redux';
+import {
     Route,
-    NavLink,
-    Switch,
-    Redirect,
-    Link 
+    Switch
 } from 'react-router-dom';
-import { ConnectedRouter } from 'react-router-redux';
+import {
+    ConnectedRouter
+} from 'react-router-redux';
 import Login from './components/login' ;
 import Home from './components/home' ;
 import Project from './components/projects' ;
 import NoMatch from './components/404' ;
+
 const routes = [
     {
         path: '/',
@@ -23,37 +24,31 @@ const routes = [
     {
         path: '/projects',
         component: Project
-    }/*,
+    },
     {
         path: '/projects/:projectId',
         component: Home
-    }*/
+    }
 ];
 
-console.log('ConnectedRouter', ConnectedRouter)
+const RotesWrap = route => (
+    <Route 
+        path={route.path} 
+        {...(route.exact ? {exact: true} : {})}
+        render={() => <route.component/>}
+    />
+);
 
-const RotesWrap = (route) => {
-    return (
-        <Route path={route.path} {...(route.exact ? {exact: true} : {})} render={props => {
-            return <route.component {...props} routes={route.routes}/>
-        }}/>
-    )
-}
+const AppRouting = ({history}) => (
+    <ConnectedRouter history={history}>
+        <Switch>
+            {routes.map(route => (
+                <RotesWrap key={route.path} {...route}/>
+            ))}
+            <Route component={NoMatch}/>
+        </Switch>
+    </ConnectedRouter>
+);
 
-class AppRouting extends React.Component {
-    render() {
-        console.log(this.props.history)
-        return (
-            <ConnectedRouter history={{...this.props.history}}>
-                <div>
-                    {routes.map((route, i) => (
-                        <RotesWrap key={i} {...route} props={this.props}/>
-                    ))}
-                </div>
-            </ConnectedRouter>
-        )
-    }
-}
-
-export default connect(/*stateToProps*/)(AppRouting);
+export default connect()(AppRouting);
 

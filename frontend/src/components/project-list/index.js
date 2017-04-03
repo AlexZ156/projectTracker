@@ -2,17 +2,16 @@
 import { connect } from 'react-redux';
 import Project from './project';
 
-const stateToProps = ({routing}) => {
-    console.log('routing ======> ', routing)
-    return {
-        projects:{}
-    }
-};
+const stateToProps = ({routing, projects}) => ({
+    routing,
+    projects
+});
 
 class ProgectsList extends React.Component {
     render() {
         const { projects } = this.props;
 
+        console.log(1111, this)
         return (
             <table>
                 <tbody>
